@@ -20,7 +20,7 @@ rockchip_setup_interfaces()
 
 generate_mac_from_sd()
 {
-	local sd_hash=$(sha256sum /sys/devices/platform/ff500000.dwmmc/mmc_host/mmc0/mmc0:*/cid)
+	local sd_hash=$(sha256sum /sys/devices/platform/*.dwmmc/mmc_host/mmc0/mmc0:*/cid)
 	local mac_base=$(macaddr_canonicalize "$(echo "${sd_hash}" | dd bs=1 count=12 2>/dev/null)")
 	echo "$(macaddr_unsetbit_mc "$(macaddr_setbit_la "${mac_base}")")"
 }
